@@ -2,6 +2,7 @@ package s103_n1_e03_capitalGame;
 
 import s103_n1_e03_capitalGame.gameResources.CountryList;
 import s103_n1_e03_capitalGame.gameResources.Game;
+import s103_n1_e03_capitalGame.gameResources.SaveScore;
 import s103_n1_e03_capitalGame.gameResources.Player;
 
 import java.util.Scanner;
@@ -20,13 +21,13 @@ public class ConsoleUI {
         boolean running = true;
         while (running) {
             Player currentPlayer = inputPlayer();
-            Game currentGame = new Game(this.scanner, this.countryList);
+            Game currentGame = new Game(this.scanner, this.countryList, this);
 
             int score = currentGame.play();
             System.out.println("Your score was " + score + "/10");
             currentPlayer.setScore(score);
             // Save score to external file
-            currentGame.saveScore(currentPlayer.getName(), score);
+            SaveScore.saveScore(currentPlayer.getName(), score);
 
             int option = Helpers.readInt("Want to try again? 1 for 'Yes', 0 for 'No' ", this.scanner);
 
@@ -46,10 +47,6 @@ public class ConsoleUI {
             System.out.print("Enter player name: ");
             String playerName = this.scanner.nextLine().trim();
             player = new Player(playerName);
-
-            if (!player.nameIsValid(player.getName())) {
-                System.out.println("Invalid name. Try again.");
-            }
         }
 
         return player;
@@ -71,5 +68,20 @@ public class ConsoleUI {
         }
 
         return countryList;
+    }
+
+    public String inputAnswer(int i, String country) {
+        System.out.print("Question " + (i + 1) + ": What is the capital of " + country + "? ");
+        String answer = this.scanner.nextLine().trim();
+
+        return answer;
+    }
+
+    public void outputFeedback(boolean bool, String country) {
+        if (bool) {
+            System.out.println("Correct!");
+        } else {
+            System.out.println("Wrong. The capital of " + country + " is " + this.countryList.getCountries().get(country) + ".");
+        }
     }
 }
