@@ -1,6 +1,7 @@
 package s103_n2_e01_HashSet;
 
 import java.util.Comparator;
+import java.util.Objects;
 
 public class Restaurant {
 
@@ -23,9 +24,11 @@ public class Restaurant {
     
     @Override
     public boolean equals(Object other) {
-        Restaurant otherRestaurant = (Restaurant) other;
+        if (this == other) return true;
+        if (!(other instanceof Restaurant otherRestaurant)) return false;
+
         return this.puntuacio == otherRestaurant.puntuacio &&
-                (this.nom == null ? otherRestaurant.nom == null : this.nom.equals(otherRestaurant.nom));
+                (Objects.equals(this.nom, otherRestaurant.nom));
     }
 
     @Override
