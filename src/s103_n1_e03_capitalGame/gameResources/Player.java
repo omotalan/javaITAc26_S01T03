@@ -1,6 +1,6 @@
 package s103_n1_e03_capitalGame.gameResources;
 
-import n03_e01_reservesCinema.exceptions.InvalidPersonNameException;
+import s103_n1_e03_capitalGame.exceptions.InvalidPersonNameException;
 
 public class Player {
     private String name;
@@ -25,11 +25,13 @@ public class Player {
 
     public boolean nameIsValid(String name) {
         if (name == null || name.trim().isEmpty()) {
-            throw new InvalidPersonNameException("Name cannot be empty.");
+            System.out.println("Name cannot be empty. Try again");
+            return false;
         }
         for (int i = 0; i < name.length(); i++) {
             if (Character.isDigit(name.charAt(i))) {
-                throw new InvalidPersonNameException("Name cannot contain numbers.");
+                System.out.println("Name cannot contain numbers. Try again");
+                return false;
             }
         }
         return true;

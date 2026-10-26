@@ -2,6 +2,7 @@ package s103_n1_e01_duplicats;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 
 public class Main {
 
@@ -25,7 +26,13 @@ public class Main {
         Month august = new Month("August");
         months.add(7, august);
 
+        // Insert duplicated August
+        Month augustDupl = new Month("August");
+        months.add(augustDupl);
+
+
         // Print ArrayList in order
+        System.out.println("Printing ArrayList - it has duplicates");
         for (Month mo : months) {
             System.out.println("Month: " + mo.getName());
         }
@@ -33,9 +40,19 @@ public class Main {
         // Turn Array into HashSet
         HashSet<Month> monthSet = new HashSet<>(months);
         monthSet.add(august);
+        monthSet.add(augustDupl);
 
+
+        System.out.println("\nPrinting HashSet - it doesn't have duplicates");
         for (Month mo : monthSet) {
             System.out.println("Month: " + mo.getName());
+        }
+
+        // Bucle con iterator
+        System.out.println("\nPrinting HashSet with iterator - it doesn't have duplicates");
+        Iterator<Month> it = monthSet.iterator();
+        while (it.hasNext()) {
+            System.out.println(it.next());
         }
     }
 }

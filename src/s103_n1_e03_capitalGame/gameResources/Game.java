@@ -1,7 +1,7 @@
 package s103_n1_e03_capitalGame.gameResources;
 
-import java.io.FileWriter;
-import java.io.IOException;
+import s103_n1_e03_capitalGame.ConsoleUI;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -10,40 +10,39 @@ import java.util.Scanner;
 public class Game {
     private Scanner scanner;
     private CountryList countryList;
+    private ConsoleUI ui;
 
-    public Game(Scanner scanner, CountryList countryList) {
+    public Game(Scanner scanner, CountryList countryList, ConsoleUI ui) {
         this.scanner = scanner;
         this.countryList = countryList;
+        this.ui = ui;
+    }
+
+    private List<String> shuffleList() {
+        List<String> keys = new ArrayList<String>(this.countryList.getCountries().keySet());
+        Collections.shuffle(keys);
+
+        return keys;
+    }
+
+    private boolean checkAnswer(String answer, String country) {
+        return answer.equalsIgnoreCase(this.countryList.getCountries().get(country));
     }
 
     public int play() {
-        List<String> keys = new ArrayList<String>(this.countryList.getCountries().keySet());
-        Collections.shuffle(keys);
+        List<String> keys = shuffleList();
 
         int score = 0;
         for (int i = 0; i < 10; i++) {
             String country = keys.get(i);
-            System.out.print("Question " + (i + 1) + ": What is the capital of " + country + "? ");
-            String answer = this.scanner.nextLine().trim();
-            if (answer.equalsIgnoreCase(this.countryList.getCountries().get(country))) {
-                System.out.println("Correct!");
+            String answer = ui.inputAnswer(i, country);
+            if (checkAnswer(answer, country)) {
+                ui.outputFeedback(true, country);
                 score++;
             } else {
-                System.out.println("Wrong. The capital of " + country + " is " + this.countryList.getCountries().get(country) + ".");
+                ui.outputFeedback(false, country);
             }
         }
         return score;
-    }
-
-    public void saveScore(String name, int score) {
-        try {
-            FileWriter writer = new FileWriter("javaITAc26_S01T03/src/s103_n1_e03_capitalGame/classificacio.txt", true);
-            writer.write(name + " " + score);
-            writer.write(System.lineSeparator());
-            writer.close();
-            System.out.println("Score saved to classificacio.txt");
-        } catch (IOException e) {
-            System.out.println("Could not save the score.");
-        }
     }
 }

@@ -1,8 +1,10 @@
 package s103_n3_e01_csvPerson;
 
+import s103_n3_e01_csvPerson.personAdmin.Person;
 import s103_n3_e01_csvPerson.personAdmin.PersonList;
 import s103_n3_e01_csvPerson.personAdmin.PersonService;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 
@@ -11,7 +13,7 @@ public class ConsoleUI {
     PersonService personService;
     PersonList persones;
 
-    public ConsoleUI(Scanner scanner, PersonService personService) {
+    public ConsoleUI(Scanner scanner, PersonService personService) throws IOException {
         this.scanner = scanner;
         this.personService = personService;
         this.persones = inputPersonList();
@@ -24,7 +26,7 @@ public class ConsoleUI {
             option = Helpers.readInt(this.scanner, "Opció: ");
             switch (option) {
                 case 1:
-                    this.persones.addPerson(this.scanner);
+                    addPerson(this.scanner);
                     break;
                 case 2:
                     this.personService.showByNom(this.persones, true);
@@ -72,9 +74,24 @@ public class ConsoleUI {
         while (personList == null) {
             System.out.print("Enter the path to the person list file: ");
             String fileName = this.scanner.nextLine().trim();
-            personList = new PersonList(fileName);
+            try {
+                personList = new PersonList(fileName);
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+                System.out.println("Si us plau, introdueix una altra ruta.");
+                personList = null;
+            }
         }
 
         return personList;
+    }
+
+
+    public void addPerson(Scanner scanner) {
+        String nom = Helpers.readString(scanner, "Nom: ");
+        String cognom = Helpers.readString(scanner, "Cognom: ");
+        String dni = Helpers.readString(scanner, "DNI: ");
+        this.persones.getPersones().add(new Person(nom, cognom, dni));
+        System.out.println("Persona afegida.");
     }
 }

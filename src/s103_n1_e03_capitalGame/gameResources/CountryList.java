@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import static s103_n1_e03_capitalGame.Helpers.parseLine;
+
 public class CountryList {
     private final Map<String, String> countries = new HashMap<String, String>();
 
@@ -22,7 +24,7 @@ public class CountryList {
                 if (line.isEmpty()) {
                     continue;
                 }
-                String[] parts = line.split("\\s+");
+                String[] parts = parseLine(line).toArray(new String[0]);
                 if (parts.length == 2) {
                     countries.put(parts[0], parts[1]);
                 }

@@ -1,11 +1,11 @@
 Albania Tirana
-Andorra Andorra_la_Vella
-Armenia Ereván
+Andorra "Andorra la Vella"
+Armenia Yerevan
 Austria Vienna
 Azerbaijan Baku
 Belarus Minsk
 Belgium Brussels
-Bosnia_and_Herzegovina Sarajevo
+"Bosnia and Herzegovina" Sarajevo
 Bulgaria Sofia
 Croatia Zagreb
 Cyprus Nicosia
@@ -14,7 +14,7 @@ Denmark Copenhagen
 Estonia Tallin
 Finland Helsinki
 France Paris
-Georgia Atlanta
+Georgia Tblisi
 Germany Berlin
 Greece Athens
 Hungary Budapest
@@ -29,16 +29,16 @@ Lithuania Vilnius
 Luxembourg Luxembourg
 Malta Valletta
 Moldova Chisinau
-Monaco Monte_Carlo
+Monaco "Monte Carlo"
 Montenegro Podgorica
 Netherlands Amsterdam
-North_Macedonia Skpje
+"North Macedonia" Skopje
 Norway Oslo
 Poland Warsaw
 Portugal Lisbon
 Romania Bucharest
 Russia Moscow
-San_Marino San_Marino
+"San Marino" "San Marino"
 Serbia Belgrade
 Slovakia Bratislava
 Slovenia Ljubljana
@@ -47,5 +47,5 @@ Sweden Stockholm
 Switzerland Bern
 Turkey Ankara
 Ukraine Kyiv
-United_Kingdom London
-Vatican_City Vatican_City
+"United Kingdom" London
+"Vatican City" "Vatican City"
