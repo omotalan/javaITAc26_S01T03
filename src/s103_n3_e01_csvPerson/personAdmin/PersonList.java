@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class PersonList {
     private ArrayList<Person> persones = new ArrayList<>();
 
-    public PersonList(String fileName) {
+    public PersonList(String fileName) throws IOException {
         readCsv(fileName);
     }
 
@@ -18,9 +18,9 @@ public class PersonList {
         return persones;
     }
 
-    private void readCsv(String fileName) {
+    private void readCsv(String fileName) throws IOException {
+        Scanner reader = new Scanner(new FileReader(fileName));
         try {
-            Scanner reader = new Scanner(new FileReader(fileName));
             while (reader.hasNextLine()) {
                 String line = reader.nextLine();
                 if (line.trim().isEmpty()) {
@@ -31,18 +31,9 @@ public class PersonList {
                     this.persones.add(new Person(parts[0], parts[1], parts[2]));
                 }
             }
+        } finally {
             reader.close();
-        } catch (IOException e) {
-            System.out.println("No s'ha pogut llegir el fitxer: " + fileName);
         }
     }
 
-
-    public void addPerson(Scanner scanner) {
-        String nom = Helpers.readString(scanner, "Nom: ");
-        String cognom = Helpers.readString(scanner, "Cognom: ");
-        String dni = Helpers.readString(scanner, "DNI: ");
-        this.persones.add(new Person(nom, cognom, dni));
-        System.out.println("Persona afegida.");
-    }
 }

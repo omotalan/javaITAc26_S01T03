@@ -2,11 +2,12 @@ package s103_n3_e01_csvPerson;
 
 import s103_n3_e01_csvPerson.personAdmin.PersonService;
 
+import java.io.IOException;
 import java.util.*;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         Scanner scanner = new Scanner(System.in);
         PersonService personService = new PersonService();
